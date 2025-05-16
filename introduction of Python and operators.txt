@@ -1,0 +1,52 @@
+Python
+
+programming language => collection of statement => task perform 
+
+python => Interpreted 
+High level programming 
+computer => machine level language 
+-simple (syntax is simple )
+- open source programming 
+- wide variety
+- Dynamic typed programming 
+
+source code => Machine level language
+                 (  Interpretor    / compiler )
+
+lets start some basic code 
+
+
+print("hello world" )
+print("hello himanshu")
+
+# variable decleration
+
+x=10 
+print(type(x))
+
+x="10"
+print( type(x))
+
+year=2025
+company="regex software"
+print("my year is ",year,"company name is =>",company)
+
+# Multi line string 
+address="BJS gopalpura tonk jaipur rajasthan 302018"
+print(address)
+
+#Basic idea on operator
+# airthmetic 
+# + - , %
+10/2
+
+# float is a larger data type 
+5.0+2
+# comparision => True/False 
+# >, >= , < , <=, !=, ==
+10>2 or 10>5
+
+
+
+
+
