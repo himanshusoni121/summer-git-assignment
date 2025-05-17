@@ -1,0 +1,111 @@
+class HouseDesign:
+  color="yellow"
+
+#object=class()
+h1=HouseDesign()
+print(h1.color)
+
+#output => yellow
+
+h2=HouseDesign()
+h2.color="white"
+print(h1.color)h2=HouseDesign()
+h2.color="white"
+print(h1.color)
+
+#output => white
+
+class HouseDesign:
+  def __init__(self): # __iniT__ ia constructor 
+    print("he is comming ",self) # self => current objrct reference is stored 
+
+  h1=HouseDesign
+
+
+class HouseDesign:
+  def __init__(self,x):
+    self.color=x     #h1.color=green
+
+
+h1 = HouseDesign("green")
+print("h1:", h1.color)
+
+h2 = HouseDesign("pink")
+print("h2:", h2.color)
+
+#output => h1: green
+          h2: pink
+
+
+
+#inheritance => parent class => child class
+
+class parent:
+  amount=50000
+
+class child(parent):  
+  salary=10000
+
+c1=child()
+print(c1.amount)
+
+#output => 50000
+
+
+class driver:
+  def __init__(self,x,y,z):
+    self.name=x
+    self.id=y
+    self.email=z
+
+d1=driver("soni",10,"xx")
+print(d1.id,d1.name)
+
+
+#output => 10 soni
+
+class customer(driver):
+  def __init__(self,x,y,z,a):
+    super().__init__(x,y,z)   #super keyword is used to call constructor of parent class
+    self.wallet=a
+
+c1=customer("Soni",22,"xx",10000)
+print(c1.name)
+
+#output =>  soni
+
+#create a class with emp_name , salary , emp_id and find monthly  salary and get domain from email 
+class employee:
+   def __init__(self, name , email, salary):
+    self.name=name
+    self.email=email
+    self.salary=salary
+
+   def info(self)
+    print( self.salary//12 , self.email.split("@")[-1])
+
+e1=employee("soni","soni@gmail.com",6000)
+e1.info()
+
+
+#output => 500 gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
