@@ -1,0 +1,138 @@
+import pandas as pd
+!pip install plotly
+
+
+import pandas as pd
+import plotly.express as px
+import plotly.io as pio
+import plotly.graph_objects as go
+
+# Set the default template for Plotly figures
+pio.templates.default = "plotly_white"
+
+df=pd.read_csv('supply_chain.csv')
+df.describe()
+
+
+!pip install statsmodels
+
+fig = px.scatter(df , x='Price',
+                 y='Revenue generated', # Changed 'Revenue granted' to 'Revenue generated' based on available columns
+                 color='Product type', # Changed 'product type' to 'Product type' based on available columns
+                 hover_data=["Number of products sold"], # Changed "products are sold" to "Number of products sold" based on available columns
+                 trendline="ols")
+fig.show()
+
+# sales_data
+df.groupby('Product type')['Number of products sold'].sum().reset_index()
+
+pie_chart = px.pie(df, values='Number of products sold',
+names='Product type',
+title='Sales by Product Type',
+hover_data=['Number of products sold'],
+hole=0.5,
+color_discrete_sequence=px.colors.qualitative.Pastel)
+
+pie_chart.update_traces (textposition='inside', textinfo='percent+label')
+
+pie_chart.show()
+
+
+
+
+total_revenue = df.groupby('Shipping carriers')['Revenue generated'].sum().reset_index()
+
+fig = go.Figure()
+fig.add_trace(go.Bar(x= total_revenue['Shipping carriers'],
+                     y=total_revenue['Revenue generated']))
+fig.update_layout(title ='Total Revenue by Shipping carrier  ',
+                  xaxis_title='Shipping carriers',
+                  yaxis_title='Revenue Generated ')
+fig.show()
+
+
+avg_lead_time = df.groupby('Product type')['Lead time'].mean().reset_index()
+
+avg_manufacturing_costs = df.groupby('Product type')['Manufacturing costs'].mean().reset_index()
+result = pd.merge(avg_lead_time, avg_manufacturing_costs,
+                  on ='Product type')
+result.rename(columns={'Lead time': 'Average Lead Time',
+                       'Manufacturing costs':'Average Manufacturing Costs'},
+              inplace=True)
+print(result)
+
+
+order_quantity_chart = px.bar(df, x='SKU',
+                              y='Order quantities',  # Corrected the column name
+                              title = ' order Quantity by SKU')
+order_quantity_chart.show()
+
+shipping_cost_chart = px.bar(df, x='Shipping carriers',
+                              y='Shipping costs',  # Corrected the column name
+                              title = ' Shipping Costs by Carrier')
+shipping_cost_chart.show()
+
+
+transportation_chart= px.pie(df,
+                            values='Costs',
+                            names='Transportation modes' ,
+                            title='costs',
+                            hole=0.5,
+                            color_discrete_sequence= # Corrected the keyword argument
+                            px.colors.qualitative.Pastel)
+transportation_chart.show()
+
+
+df=pd.read_csv('linkedin-reviews.csv')
+df.describe() 
+
+import seaborn as sns
+
+
+import matplotlib .pyplot as plt
+
+
+sns.set(style = 'whitegrid')
+
+plt.figure(figsize = (9,5))
+
+sns.countplot(data = df, x = 'Rating')
+
+plt.title('Distribution of Ratings')
+
+plt.xlabel('Rating')
+
+plt.ylabel('Count')
+
+plt.show()
+
+
+!pip install textblob
+from textblob import TextBlob
+
+def textblob_sentiment_analysis (review):
+
+    sentiment = TextBlob (review).sentiment
+
+    if sentiment.polarity > 0.1:
+
+      return 'Positive'
+
+    elif sentiment.polarity < -0.1:
+
+      return 'Negative'
+
+    else:
+
+      return 'Neutral'
+
+
+
+df['Sentiment']=df['Review'].apply(textblob_sentiment_analysis)
+
+df.sample(5)
+
+
+sentiment_distribution = df['Sentiment'].value_counts()
+sentiment_distribution
+
